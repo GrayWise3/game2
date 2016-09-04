@@ -38,16 +38,23 @@ class Game {
 
     public void step (double elapsedTime) {
     	fish.step(elapsedTime);
-    	
-    	//STILL WORKING ON THIS
-    	if(hook.isColliding(fish)){
-    	    fish.caught(hook);
-    	}
+
     }
     
     private void handleKeyInput(KeyCode code) {
+        //System.out.println(code.getName());
+        if(code.getName().equals("Space")){
+            //System.out.println("in if");
+            if(hook.isColliding(fish)){
+                //System.out.println("Reeling in");
+                fish.setSpeed(0);
+                hook.setY(160);
+                fish.setYSpeed(100);
+            }
+        }
         player.move(code);
         hook.move(code);
         fish.move(code);
+        
     }
 }

@@ -10,13 +10,24 @@ public class Fish extends Actor {
     private Image fish;
     private double x;
     private double y;
-    private double fishSpeed = 1;
+    private double fishXSpeed = 40;
+    private double fishYSpeed = 0;
     private int height = 42;
     private int width = 83;
     
     public Fish(){
     	x = 300;
     	y = 300;
+    	init();
+    }
+    
+    public void init() {
+        
+        fish = new Image("/images/fish.gif");
+        fishview = new ImageView();
+        fishview.setImage(fish);
+        fishview.setFitHeight(height);
+        fishview.setFitWidth(width);
     }
 	
 	@Override
@@ -42,10 +53,10 @@ public class Fish extends Actor {
 	public void move(KeyCode code) {
 		switch(code){
 		case S:
-		    fishSpeed = fishSpeed/2;
+		    fishXSpeed = fishXSpeed/2;
 		    break;
 		case F:
-		    fishSpeed = fishSpeed*2;
+		    fishXSpeed = fishXSpeed*2;
 		    break;
 		case SPACE:
 		    
@@ -56,19 +67,16 @@ public class Fish extends Actor {
 
 	@Override
 	public void step(double elapsedTime) {
-		fishview.setX(fishview.getX() - fishSpeed);
-		setX(fishview.getX() - fishSpeed);
-		if(fishview.getX()+width <= 0)
-			fishview.setX(600);
+		setX(getX() - fishXSpeed*elapsedTime);
+		setY(getY() - fishYSpeed*elapsedTime);
+		if(getX()+width <= 0)
+			setX(600);
+		draw();
 	}
 
 	@Override
 	public Node draw() {
-	    fish = new Image("/images/fish.gif");
-	    fishview = new ImageView();
-	    fishview.setImage(fish);
-	    fishview.setFitHeight(height);
-	    fishview.setFitWidth(width);
+	   
 	    fishview.setX(x);
 	    fishview.setY(y);
 	    return fishview;
@@ -84,12 +92,16 @@ public class Fish extends Actor {
 	
 	//STILL WORKING ON THIS
 	public void caught(Actor a) {
-            setSpeed(0);
-            setY(160);
-            fishview.setY(y);
+//            setSpeed(0);
+//            setY(160);
+//            fishview.setY(y);
     }
 	public void setSpeed(int i){
-	    fishSpeed = i;
+	    fishXSpeed = i;
 	}
+	
+	public void setYSpeed(int i){
+            fishYSpeed = i;
+        }
 
 }
