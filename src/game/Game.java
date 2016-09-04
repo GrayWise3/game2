@@ -10,7 +10,7 @@ import javafx.scene.shape.Shape;
 
 class Game {
     public static final String TITLE = "Hook Line Sinker";
-    public static final int KEY_INPUT_SPEED = 15;
+    public static final int KEY_INPUT_SPEED = 5;
     private Group root;
     private Scene myScene;
     private Player player = new Player();
@@ -38,9 +38,14 @@ class Game {
 
     public void step (double elapsedTime) {
     	fish.step(elapsedTime);
+    	
+    	//STILL WORKING ON THIS
+    	if(hook.isColliding(fish)){
+    	    fish.caught(hook);
+    	}
     }
     
-    private void handleKeyInput (KeyCode code) {
+    private void handleKeyInput(KeyCode code) {
         player.move(code);
         hook.move(code);
         fish.move(code);

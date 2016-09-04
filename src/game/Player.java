@@ -6,11 +6,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 
 public class Player extends Actor{
-	private static final double KEY_INPUT_SPEED = 15;
-	private ImageView player;
+    private static final double KEY_INPUT_SPEED = 15;
+    private ImageView myPlayer;
     private Image fisherman;
-    private int x;
-    private int y;
+    private double x;
+    private double y;
+    private double velocity;
     private int height = 183;
     private int width = 258;
     
@@ -21,58 +22,66 @@ public class Player extends Actor{
     
     public Node draw(){
     fisherman = new Image("/images/fisherman.png");
-    player = new ImageView();
-    player.setImage(fisherman);
-    player.setFitHeight(height);
-    player.setFitWidth(width);
-    player.setX(x);
-    player.setY(y);
-    return player;
+    myPlayer = new ImageView();
+    myPlayer.setImage(fisherman);
+    myPlayer.setFitHeight(height);
+    myPlayer.setFitWidth(width);
+    myPlayer.setX(x);
+    myPlayer.setY(y);
+    return myPlayer;
     }
 
-    public int getX(){
+    public double getX(){
     	return x;
     }
     
-    public int getY(){
+    public double getY(){
     	return y;
     }
     
-    public void setX(int i){
+    public void setX(double i){
     	x = i;
     }
     
-    public void setY(int i){
+    public void setY(double i){
     	y = i;
+    }
+    
+    public void setVelocity(double d){
+    	
     }
     
     public void step(double elapsedTime){
     	
     }
 
-	public void move(KeyCode code) {
+    public void move(KeyCode code) {
 		switch (code) {
         case RIGHT:
-        	player.setX(player.getX() + KEY_INPUT_SPEED);
+        	myPlayer.setX(myPlayer.getX() + KEY_INPUT_SPEED);
             break;
         case LEFT:
-        	if(player.getX() != 0)
-        	player.setX(player.getX() - KEY_INPUT_SPEED);
+        	if(myPlayer.getX() != 0)
+        	myPlayer.setX(myPlayer.getX() - KEY_INPUT_SPEED);
             break;
         case UP:    	
             break;
         case DOWN:
             break;
         case SPACE:
-        	
-        	break;
-        case S:
-        	
+            
             break;
-        case B:
-        	break;
         default:
 		} 
-	}
+    }
+
+    public int getWidth () {
+        return width;
+    }
+    
+    public int getHeight () {
+        return height;
+    }
+
 
 }
