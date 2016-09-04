@@ -1,4 +1,5 @@
 package game;
+import java.io.FileNotFoundException;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -22,7 +23,7 @@ public class Main extends Application{
     public void start (Stage s) {
     	Game myGame = new Game();
         s.setTitle(myGame.getTitle());
-        Scene scene = myGame.init(600, 500);
+        Scene scene = myGame.init(800, 500);
         s.setScene(scene);
         s.show();
         //set the games loop

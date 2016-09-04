@@ -51,13 +51,13 @@ public class Hook extends Actor{
     }
     
     public void step(double elapsedTime){
-    	
         draw();
     }
 
     public void move(KeyCode code) {
 	switch (code) {
         case RIGHT:
+                if(getX()+width < 750)
         	setX(getX() + KEY_INPUT_SPEED);
                 break;
         case LEFT:
@@ -84,18 +84,17 @@ public class Hook extends Actor{
 	
 
     public int getWidth () {
-	        return width;
-	    }
+        return width;
+    }
 	    
-	public int getHeight () {
-	        return height;
-	    }
+    public int getHeight () {
+        return height;
+    }
 
-	//STILL WORKING ON THIS
-	public boolean isColliding(Actor a){
-            if(x >= a.getX() && x <= a.getX()+a.getWidth()-10 && y >= a.getY()-20 && y <= a.getY()+a.getHeight()-30){
-                return true;
-            }
+    public boolean isColliding(Actor a){
+        if(x >= a.getX() && x <= a.getX()+a.getWidth()-10 && y >= a.getY()-20 && y <= a.getY()+a.getHeight()-30){
+            return true;
+        }
             return false;
 	}
 

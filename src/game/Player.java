@@ -58,10 +58,11 @@ public class Player extends Actor{
     public void move(KeyCode code) {
 		switch (code) {
         case RIGHT:
-        	myPlayer.setX(myPlayer.getX() + KEY_INPUT_SPEED);
+        	if(myPlayer.getX()+width < 800)
+                myPlayer.setX(myPlayer.getX() + KEY_INPUT_SPEED);
             break;
         case LEFT:
-        	if(myPlayer.getX() != 0)
+        	if(myPlayer.getX() > 0)
         	myPlayer.setX(myPlayer.getX() - KEY_INPUT_SPEED);
             break;
         case UP:    	

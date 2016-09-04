@@ -6,18 +6,20 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 
 public class Fish extends Actor {
-	private ImageView fishview;
+    private ImageView fishview;
     private Image fish;
-    private double x;
-    private double y;
-    private double fishXSpeed = 40;
+    private double myX;
+    private double myY;
+    private double fishXSpeed;
     private double fishYSpeed = 0;
     private int height = 42;
     private int width = 83;
+    private int fishDir = 1;
     
-    public Fish(){
-    	x = 300;
-    	y = 300;
+    public Fish(double d, double e){
+    	myX = d;
+    	myY = e;
+    	fishXSpeed = ((Math.random()+2)*30)*fishDir;
     	init();
     }
     
@@ -32,22 +34,22 @@ public class Fish extends Actor {
 	
 	@Override
 	public double getX() {
-		return x;
+		return myX;
 	}
 
 	@Override
 	public double getY() {
-		return y;
+		return myY;
 	}
 
 	@Override
 	public void setX(double i) {
-		x = i;
+		myX = i;
 	}
 
 	@Override
 	public void setY(double i) {
-		y = i;
+		myY = i;
 	}
 
 	public void move(KeyCode code) {
@@ -58,8 +60,9 @@ public class Fish extends Actor {
 		case F:
 		    fishXSpeed = fishXSpeed*2;
 		    break;
-		case SPACE:
-		    
+		case D:
+		    fishDir = -1;
+		    fishXSpeed = ((Math.random()+2)*30)*fishDir;
 		    break;
 		default:
 		}
@@ -70,15 +73,18 @@ public class Fish extends Actor {
 		setX(getX() - fishXSpeed*elapsedTime);
 		setY(getY() - fishYSpeed*elapsedTime);
 		if(getX()+width <= 0)
-			setX(600);
-		draw();
+			setX(800);
+		if(getY() <= 160){
+		    setY(160);
+		}		
+		draw();	
 	}
 
 	@Override
 	public Node draw() {
 	   
-	    fishview.setX(x);
-	    fishview.setY(y);
+	    fishview.setX(myX);
+	    fishview.setY(myY);
 	    return fishview;
 	}
 	
@@ -88,14 +94,8 @@ public class Fish extends Actor {
 	    
 	public int getHeight () {
 	    return height;
-	    }
+	}
 	
-	//STILL WORKING ON THIS
-	public void caught(Actor a) {
-//            setSpeed(0);
-//            setY(160);
-//            fishview.setY(y);
-    }
 	public void setSpeed(int i){
 	    fishXSpeed = i;
 	}
