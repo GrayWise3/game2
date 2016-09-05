@@ -28,9 +28,9 @@ class Game {
     private Text score;
     private int scoreInt = 0;
     private Text time;
-    private double keepTime = 100;
-    private int screenHeight = 500;
-    private int screenWidth = 800;
+    private double keepTime = 5;
+    boolean isOver = false;
+    Text gameOverText = new Text("Game Over");
     
     public String getTitle () {
         return TITLE;
@@ -45,6 +45,9 @@ class Game {
         time.setFont(Font.font ("Verdana", 20));
         time.setX(650);
         time.setY(60);
+        gameOverText.setFont(Font.font ("Verdana", 100));
+        gameOverText.setX(125);
+        gameOverText.setY(400);
         background = new Image("/images/background.jpg");
         bgView = new ImageView();
         bgView.setImage(background);
@@ -90,6 +93,10 @@ class Game {
     	//change time
     	keepTime = keepTime - elapsedTime;
     	time.setText("Time: " + (int)keepTime);
+    	if((int)keepTime == 0){
+    	    gameOver();
+    	    keepTime = 0;
+    	}
     }
     
     private void handleKeyInput(KeyCode code) {
@@ -113,5 +120,18 @@ class Game {
             fish.get(i).move(code);
         }
         
+    }
+    
+    public void gameOver(){
+        if(isOver == false){
+        root.getChildren().addAll(gameOverText);
+        isOver = true;
+        for(int i = 0; i < fish.size(); i++)
+        {
+            fish.get(i).setSpeed(0);
+            hook.gameOver();
+            player.gameOver();
+        }
+        }
     }
 }

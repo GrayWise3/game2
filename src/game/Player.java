@@ -16,6 +16,7 @@ public class Player extends Actor{
     private int width = 258;
     private int screenWidth = 800;
     private int screenHeight = 500;
+    private boolean gameOverCond = false;
     
     public Player(){
     	x = 0;
@@ -58,7 +59,9 @@ public class Player extends Actor{
     }
 
     public void move(KeyCode code) {
-		switch (code) {
+        if(gameOverCond == false)
+        {
+        switch (code) {
         case RIGHT:
         	if(myPlayer.getX()+width < screenWidth)
                 myPlayer.setX(myPlayer.getX() + KEY_INPUT_SPEED);
@@ -76,6 +79,7 @@ public class Player extends Actor{
             break;
         default:
 		} 
+        }
     }
 
     public int getWidth () {
@@ -86,5 +90,8 @@ public class Player extends Actor{
         return height;
     }
 
+    public void gameOver(){
+        gameOverCond = true;
+    }
 
 }

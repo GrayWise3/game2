@@ -15,6 +15,7 @@ public class Hook extends Actor{
     private int width = 20;
     private int screenWidth = 800;
     private int screenHeight = 500;
+    private boolean gameOverCond = false;
     
     public Hook(){
     	x = 180;
@@ -57,6 +58,8 @@ public class Hook extends Actor{
     }
 
     public void move(KeyCode code) {
+        if(gameOverCond == false)
+        {
 	switch (code) {
         case RIGHT:
                 if(getX()+width < 750)
@@ -82,6 +85,7 @@ public class Hook extends Actor{
             break;
             default:
 		} 
+        }
 	}
 	
 
@@ -99,5 +103,9 @@ public class Hook extends Actor{
         }
             return false;
 	}
+
+    public void gameOver() {
+        gameOverCond = true;
+    }
 
 }
