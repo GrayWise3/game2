@@ -6,6 +6,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 
 public class Fish extends Actor {
+    private int screenWidth = 800;
+    private int screenHeight = 500;
     private ImageView fishview;
     private Image fish;
     private double myX;
@@ -73,9 +75,10 @@ public class Fish extends Actor {
 		setX(getX() - fishXSpeed*elapsedTime);
 		setY(getY() - fishYSpeed*elapsedTime);
 		if(getX()+width <= 0)
-			setX(800);
+			setX(screenWidth);
 		if(getY() <= 160){
 		    setY(160);
+		    
 		}		
 		draw();	
 	}

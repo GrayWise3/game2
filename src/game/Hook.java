@@ -13,6 +13,8 @@ public class Hook extends Actor{
     private double y;
     private int height = 40;
     private int width = 20;
+    private int screenWidth = 800;
+    private int screenHeight = 500;
     
     public Hook(){
     	x = 180;

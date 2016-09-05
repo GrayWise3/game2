@@ -13,11 +13,14 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+
 public class Main extends Application{
 	public static final int SIZE = 400;
     public static final int FRAMES_PER_SECOND = 60;
     private static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
     private static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
+    private int screenHeight = 500;
+    private int screenWidth = 800;
 
     @Override
     public void start (Stage s) {

@@ -28,7 +28,9 @@ class Game {
     private Text score;
     private int scoreInt = 0;
     private Text time;
-    private int timeInt = 100;
+    private double keepTime = 100;
+    private int screenHeight = 500;
+    private int screenWidth = 800;
     
     public String getTitle () {
         return TITLE;
@@ -39,7 +41,7 @@ class Game {
         score.setFont(Font.font ("Verdana", 20));
         score.setX(650);
         score.setY(30);
-        time = new Text("Time: " + timeInt);
+        time = new Text("Time: " + keepTime);
         time.setFont(Font.font ("Verdana", 20));
         time.setX(650);
         time.setY(60);
@@ -86,7 +88,8 @@ class Game {
     	}
     	hook.step(elapsedTime);
     	//change time
-    	time.setText("Time: " + timeInt);
+    	keepTime = keepTime - elapsedTime;
+    	time.setText("Time: " + (int)keepTime);
     }
     
     private void handleKeyInput(KeyCode code) {

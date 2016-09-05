@@ -14,6 +14,8 @@ public class Player extends Actor{
     private double velocity;
     private int height = 183;
     private int width = 258;
+    private int screenWidth = 800;
+    private int screenHeight = 500;
     
     public Player(){
     	x = 0;
@@ -58,7 +60,7 @@ public class Player extends Actor{
     public void move(KeyCode code) {
 		switch (code) {
         case RIGHT:
-        	if(myPlayer.getX()+width < 800)
+        	if(myPlayer.getX()+width < screenWidth)
                 myPlayer.setX(myPlayer.getX() + KEY_INPUT_SPEED);
             break;
         case LEFT:
