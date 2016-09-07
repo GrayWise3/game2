@@ -1,4 +1,4 @@
-Title: Hook Line and Sinker
+Title: Hook Line Sinker
 Author: Grayson Wise
 
 Hook Line and Sinker is a side-scrolling adventure game about one 
@@ -6,29 +6,27 @@ of the oldest rivalries in existence: man versus fish. You play as Phil,
 a salt of the earth fisherman out to make a living. Using the arrow keys
 and space bar, try to catch all the fish in the lake, but be sure to 
 make it to land in time for dinner! Oh, and watch out for those 
-pesky electric eels! 
+pesky sharks! 
 
 Controls:
 	Up/Down Arrows: Raise/Lower your fishing hook
-	Left/Right Arrows: Move boat
-	Space Bar: Reel in hook
-	R key: Toggle Rubber Hook
+	Left/Right Arrows: Move your boat
+	Space Bar: Reel in Hook
+	Mouse Click: Freeze Sharks
 
 Objective:
-	Catch as many fish as possible and make it to the end before
-	the timer runs out!
+	Catch all the fish before the timer runs out!
 	
 Level 1: Fish are swimming beneath you. When they are right next to your
 	hook, click space bar to catch them! If you lined it up correctly, 
 	you will successfully catch the fish! If not, you'll reel in an 
-	empty line. Once you have caught all the fish and reached the dock, 
-	you will advance to level two!
+	empty line. If you catch all the fish before time runs out, you can 
+	advance to level two!
 		
-Level 2: Now, electric eels are swimming among the fish. You'll need to 
-	avoid them. Using the mouse, you can click on an eel to freeze it
-	temporarily. Also introducing fighting fish!You'll have to click 
-	the space bar rapidly if you hope to reel them in. Once you have 
-	caught all the fish and made it safely to the dock, you win!
+Level 2: Now, sharks are swimming among the fish. You'll need to 
+	avoid them. Using the mouse, you can click on a shark to freeze it
+	temporarily. If you catch all the fish before time runs out without 
+	hitting any sharks, you win! 
 		
 	
 		
