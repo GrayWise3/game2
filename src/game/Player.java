@@ -6,7 +6,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 
 public class Player extends Actor{
-    private static final double KEY_INPUT_SPEED = 15;
+    private static final double KEY_INPUT_SPEED = 10;
     private ImageView myPlayer;
     private Image fisherman;
     private double x;
@@ -92,6 +92,13 @@ public class Player extends Actor{
 
     public void gameOver(){
         gameOverCond = true;
+    }
+    
+    public void reset(){
+        gameOverCond = false;
+        setX(0);
+        setY(0);
+        draw();
     }
 
 }

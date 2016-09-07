@@ -1,5 +1,4 @@
 package game;
-import java.io.FileNotFoundException;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -15,8 +14,8 @@ import javafx.util.Duration;
 
 
 public class Main extends Application{
-	public static final int SIZE = 400;
-    public static final int FRAMES_PER_SECOND = 60;
+    
+    private static final int FRAMES_PER_SECOND = 60;
     private static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
     private static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
     private int screenHeight = 500;
@@ -24,9 +23,9 @@ public class Main extends Application{
 
     @Override
     public void start (Stage s) {
-    	Game myGame = new Game();
+    	Game myGame = new Game(screenWidth, screenHeight);
         s.setTitle(myGame.getTitle());
-        Scene scene = myGame.init(800, 500);
+        Scene scene = myGame.init();
         s.setScene(scene);
         s.show();
         //set the games loop

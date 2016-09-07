@@ -1,7 +1,6 @@
 package game;
 
 import javafx.scene.Node;
-import javafx.scene.input.KeyCode;
 
 public abstract class Actor {
     

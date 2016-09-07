@@ -106,5 +106,17 @@ public class Fish extends Actor {
 	public void setYSpeed(int i){
             fishYSpeed = i;
         }
+	
+	public void reset(){
+	    fishXSpeed = ((Math.random()+2)*30)*fishDir;
+	    draw();
+	}
+	
+//	public void shrink(){
+//	    height = (int) (height/1.01);
+//	    width = (int) (width/1.01);
+//	    fishview.setFitHeight(height);
+//	    fishview.setFitWidth(width);
+//	}
 
 }

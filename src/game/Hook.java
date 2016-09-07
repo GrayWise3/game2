@@ -6,15 +6,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 
 public class Hook extends Actor{
-    private static final double KEY_INPUT_SPEED = 15;
+    private static final double KEY_INPUT_SPEED = 10;
     private ImageView hookview;
     private Image hook;
     private double x;
     private double y;
     private int height = 40;
     private int width = 20;
-    private int screenWidth = 800;
-    private int screenHeight = 500;
     private boolean gameOverCond = false;
     
     public Hook(){
@@ -106,6 +104,13 @@ public class Hook extends Actor{
 
     public void gameOver() {
         gameOverCond = true;
+    }
+    
+    public void reset(){
+        gameOverCond = false;
+        x = 180;
+        y = 160;
+        draw();
     }
 
 }
