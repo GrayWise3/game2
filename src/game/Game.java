@@ -28,6 +28,7 @@ class Game {
     private Image background;
     private ImageView bgView;
     private Text score;
+    private Text wonGameText;
     private Image mainScreen;
     private boolean splash = true;
     private ImageView mainView;
@@ -36,13 +37,15 @@ class Game {
     private boolean levelOne = false;
     private double START_TIME = 100;
     private double keepTime = START_TIME;
-    boolean isOver = false;
-    boolean didWin = false;
+    private boolean isOver = false;
+    private boolean didWin = false;
+    private boolean levelTwo = false;
     private Text gameOverText = new Text("Game Over");
     private Text youWinText = new Text("Level Complete");
     private Button tryAgain = new Button("Try Again");
     private Button nextLevel = new Button("Level 2");
     private Button startGame = new Button("Start Game");
+    private Button wonGame = new Button("You Won!");
     
     
     public Game(int width, int height) {
@@ -57,6 +60,7 @@ class Game {
         root = new Group();
         root.getChildren().clear();
         score = new Text("Score: " + scoreInt);
+        wonGameText = new Text();
         score.setFont(Font.font ("Verdana", 20));
         score.setX(650);
         score.setY(30);
@@ -67,6 +71,9 @@ class Game {
         gameOverText.setFont(Font.font ("Verdana", 100));
         gameOverText.setX(125);
         gameOverText.setY(400);
+        wonGameText.setFont(Font.font ("Verdana", 60));
+        wonGameText.setX(100);
+        wonGameText.setY(400);
         tryAgain.setLayoutX(360);
         tryAgain.setLayoutY(425);
         tryAgain.setOnMouseClicked(e -> restart());
@@ -74,7 +81,7 @@ class Game {
         nextLevel.setOnMouseClicked(e -> levelTwo());
         nextLevel.setLayoutY(425);
         startGame.setLayoutX(360);
-        startGame.setOnMouseClicked(e -> init());
+        startGame.setOnMouseClicked(e -> restart());
         startGame.setLayoutY(425);
         youWinText.setFont(Font.font ("Verdana", 70));
         youWinText.setX(125);
@@ -88,15 +95,17 @@ class Game {
         mainScreen = new Image("images/mainscreen.png");
         mainView = new ImageView();
         mainView.setImage(mainScreen);
+        wonGame.setLayoutX(360);
+        wonGame.setLayoutY(425);
+        wonGame.setOnMouseClicked(e -> splashScreen());
         
         myScene.setOnKeyPressed(e -> handleKeyInput(e.getCode()));
         myScene.setOnMouseClicked(e -> handleMouseInput(e.getX(), e.getY()));
         
-        if(splash){splashScreen();}
-        else if(levelOne){levelOne();}
-        else{levelTwo();}
+        if(splash && !levelOne && !levelTwo){splashScreen();}
+        if(!splash && levelOne && !levelTwo){levelOne();}
+        if(!splash && !levelOne && levelTwo){levelTwo();}
         
-        //draw();
         myScene.setRoot(root);
         return myScene;
     }
@@ -106,10 +115,28 @@ class Game {
         root.getChildren().addAll(startGame);
     }
     private void levelTwo(){
-        restart();
-        levelOne();
+        //System.out.println("Level two");
+        splash = false;
+        levelOne = false;
+        levelTwo = true;
+        restart();  
+        draw();
+        splash = false;
+        levelOne = false;
+        levelTwo = true;
+        exes.add(300);
+        whys.add(300);
+        for(int i = 0; i < exes.size(); i++)
+        {
+            fish.add(new Fish(exes.get(i), whys.get(i)));
+        }
+        for(int i = 0; i < fish.size(); i++)
+        {
+            root.getChildren().addAll(fish.get(i).draw());
+        }
+        
         sharkX.addAll(Arrays.asList(400, 700, 1200, 1500, 2000));
-        sharkY.addAll(Arrays.asList(400, 300, 400, 200, 300));
+        sharkY.addAll(Arrays.asList(400, 300, 200, 250, 350));
         for(int i = 0; i < sharkX.size(); i++)
         {
             sharks.add(new Shark(sharkX.get(i), sharkY.get(i)));
@@ -119,6 +146,8 @@ class Game {
             root.getChildren().addAll(sharks.get(i).draw());
 
         }
+        root.getChildren().addAll(hook.draw());
+
     }
     private void restart() {
         root.getChildren().clear();
@@ -131,42 +160,46 @@ class Game {
         hook.reset();
         player.reset();
         keepTime = START_TIME;
-        scoreInt = 0;
+        if(isOver == true){
+            scoreInt = 0;
+        }
         isOver = false;
         didWin = false;
+        splash = false;
+        levelOne = true;
         init();
         
     }
     
     public void levelOne(){
-//        exes.addAll(Arrays.asList(400, 500, 600, 700, 800, 900, 1000, 1100, 
-//                                  1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900, 
-//                                  2000, 2100, 2200, 2300, 2400, 2500, 2600, 2700, 2800, 2900, 3000));
-//        whys.addAll(Arrays.asList(300, 250, 400, 350, 200, 400,  300,  200,  
-//                                  300,  350,  250,  400,  350,  200,  400,  300, 
-//                                  350, 300, 250, 400, 350, 200, 400,  300,  200,  300,  350,  250));
-        System.out.println("level one");
+        exes.addAll(Arrays.asList(400, 500, 600, 700, 800, 900, 1000, 1100, 
+                                  1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900, 
+                                  2000, 2100, 2200, 2300, 2400, 2500, 2600, 2700, 2800, 2900, 3000));
+        whys.addAll(Arrays.asList(300, 250, 400, 350, 200, 400,  300,  200,  
+                                  300,  350,  250,  400,  350,  200,  400,  300, 
+                                  350, 300, 250, 400, 350, 200, 400,  300,  200,  300,  350,  250));
+        //System.out.println("level one");
         splash = false;
         levelOne = true;
-        exes.add(300);
-        whys.add(300);
+        draw();
         for(int i = 0; i < exes.size(); i++)
         {
             fish.add(new Fish(exes.get(i), whys.get(i)));
         }
-        root.getChildren().addAll(bgView);
-        root.getChildren().addAll(score);
-        root.getChildren().addAll(time);
-        root.getChildren().addAll(player.draw());
+
         for(int i = 0; i < fish.size(); i++)
         {
             root.getChildren().addAll(fish.get(i).draw());
         }
         root.getChildren().addAll(hook.draw());
+
     }
     
     public void draw(){ 
-        
+        root.getChildren().addAll(bgView);
+        root.getChildren().addAll(score);
+        root.getChildren().addAll(time);
+        root.getChildren().addAll(player.draw());
     }
 
     public void step (double elapsedTime) {
@@ -209,17 +242,26 @@ class Game {
     
     private void handleMouseInput(double x, double y){
         if(tryAgain.contains(x, y)){
-            System.out.println("pressed");
+          //  System.out.println("pressed");
+            isOver = false;
             tryAgain.getOnMouseClicked();
         }
         if(nextLevel.contains(x, y)){
-            System.out.println("pressed");
+           // System.out.println("pressed");
             levelOne = false;
             nextLevel.getOnMouseClicked();
         }
         
+        if(wonGame.contains(x, y)){
+           // System.out.println("pressed");
+            splash = true;
+            levelOne = false;
+            levelTwo = false;
+            wonGame.getOnMouseClicked();
+        }
+        
         if(startGame.contains(x, y)){
-            System.out.println("pressed");
+           // System.out.println("pressed");
             splash = false;
             levelOne = true;
             startGame.getOnMouseClicked();
@@ -238,8 +280,10 @@ class Game {
     
     private void handleKeyInput(KeyCode code) {
         
+       if(isOver == false)
+       {
         if(code.getName().equals("Space") && splash == false){
-            System.out.println("pressed space");
+           // System.out.println("pressed space");
             for(int i = 0; i < fish.size(); i++)
             {
             if(hook.isColliding(fish.get(i)) && fish.get(i).getY() != 160){
@@ -260,6 +304,7 @@ class Game {
         {
             fish.get(i).move(code);
         }
+       }
         
     }
     
@@ -275,6 +320,9 @@ class Game {
         hook.gameOver();
         player.gameOver();
         isOver = true;
+        splash = true;
+        levelOne = false;
+        levelTwo = false;
         }
     }
     
@@ -288,11 +336,21 @@ class Game {
            }
         }
         if(count == fish.size() && didWin == false && splash == false){
-            root.getChildren().addAll(youWinText);
-            root.getChildren().addAll(nextLevel);
             scoreInt = scoreInt + (int)keepTime;
             score.setText("Score: " + scoreInt);
             didWin = true;
+            if(levelOne){
+                System.out.println("Level one is true");
+            root.getChildren().addAll(youWinText);
+            root.getChildren().addAll(nextLevel);
+            }
+            else if(levelTwo){
+                System.out.println("Level two is true");
+                wonGameText.setText("YOU WIN!" + "\n" + "Final Score: " + scoreInt);
+                root.getChildren().addAll(wonGameText);
+                root.getChildren().addAll(wonGame);
+            }
+            
         }
     }
 
