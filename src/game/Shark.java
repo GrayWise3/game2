@@ -15,15 +15,22 @@ public class Shark extends Actor {
     private double sharkYSpeed = 0;
     private int height = 86;
     private int width = 133;
-    private int sharkDir = 1;
-    
-    public Shark(double d, double e){
-        myX = d;
-        myY = e;
-        sharkXSpeed = ((Math.random()+2)*30)*sharkDir;
+
+    /**
+     * Creates a new Shark at given location and sets a random speed
+     * @param inX
+     * @param inY
+     */
+    public Shark(double inX, double inY){
+        myX = inX;
+        myY = inY;
+        sharkXSpeed = ((Math.random()+2)*30);
         init();
     }
     
+    /**
+     * Loads the image needed for a shark
+     */
     public void init() {
         
         shark = new Image(getClass().getClassLoader().getResourceAsStream("shark.gif"));
@@ -57,6 +64,10 @@ public class Shark extends Actor {
         return height;
     }
 
+    /**
+     * Handles user-input for movement of the Shark (cheat keys)
+     * @param code
+     */
     public void move(KeyCode code) {
         switch(code){
             case S:
@@ -70,6 +81,10 @@ public class Shark extends Actor {
             }
     }
 
+    /**
+     * Updates the sharks position based on elapsed time and the speed
+     * @param elapsedTime
+     */
     public void step(double elapsedTime){
         setX(getX() - sharkXSpeed*elapsedTime);
         setY(getY() - sharkYSpeed*elapsedTime);
@@ -84,25 +99,42 @@ public class Shark extends Actor {
         draw(); 
         }
 
+    /**
+     * Draws the shark at a set location
+     */
     public Node draw() {          
         sharkview.setX(myX);
         sharkview.setY(myY);
         return sharkview;
         }
-        
-    public void setSpeed(int i){
+    
+    /**
+     * Sets the speed of the shark in the x-direction
+     * @param i
+     */
+    public void setXSpeed(int i){
         sharkXSpeed = i;
         }
         
+    /**
+     * Sets the speed of the shark in the y-direction
+     * @param i
+     */
     public void setYSpeed(int i){
         sharkYSpeed = i;
         }
         
+    /**
+     * Resets the sharks speed to the original speed
+     */
     public void reset(){
-        sharkXSpeed = ((Math.random()+2)*30)*sharkDir;
+        sharkXSpeed = ((Math.random()+2)*30);
         draw();
         }
        
+    /**
+     * Shrinks the shark to 1.5x its size
+     */
     public void shrink(){
         if(height > 45){
             height = (int) (height/1.5);
@@ -113,6 +145,9 @@ public class Shark extends Actor {
         else{}
       }
       
+    /**
+     * Returns the shark to its original size
+     */
     public void resize(){
           height = 86;
           width = 133;
