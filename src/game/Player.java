@@ -9,18 +9,16 @@ public class Player extends Actor{
     private static final double KEY_INPUT_SPEED = 10;
     private ImageView myPlayer;
     private Image fisherman;
-    private double x;
-    private double y;
-    private double velocity;
+    private double myX;
+    private double myY;
     private int height = 183;
     private int width = 258;
     private int screenWidth = 800;
-    private int screenHeight = 500;
-    private boolean gameOverCond = false;
+    private boolean gameOverCondition = false;
     
     public Player(){
-    	x = 0;
-    	y = 0;
+    	myX = 0;
+    	myY = 0;
     }
     
     public Node draw(){
@@ -29,37 +27,37 @@ public class Player extends Actor{
     myPlayer.setImage(fisherman);
     myPlayer.setFitHeight(height);
     myPlayer.setFitWidth(width);
-    myPlayer.setX(x);
-    myPlayer.setY(y);
+    myPlayer.setX(myX);
+    myPlayer.setY(myY);
     return myPlayer;
     }
 
     public double getX(){
-    	return x;
+    	return myX;
     }
     
     public double getY(){
-    	return y;
+    	return myY;
     }
     
     public void setX(double i){
-    	x = i;
+    	myX = i;
     }
     
     public void setY(double i){
-    	y = i;
+    	myY = i;
     }
     
-    public void setVelocity(double d){
-    	
+    public int getWidth () {
+        return width;
     }
     
-    public void step(double elapsedTime){
-    	
+    public int getHeight () {
+        return height;
     }
 
     public void move(KeyCode code) {
-        if(gameOverCond == false)
+        if(gameOverCondition == false)
         {
         switch (code) {
         case RIGHT:
@@ -70,35 +68,21 @@ public class Player extends Actor{
         	if(myPlayer.getX() > 0)
         	myPlayer.setX(myPlayer.getX() - KEY_INPUT_SPEED);
             break;
-        case UP:    	
-            break;
-        case DOWN:
-            break;
-        case SPACE:
-            
-            break;
         default:
 		} 
         }
     }
 
-    public int getWidth () {
-        return width;
-    }
-    
-    public int getHeight () {
-        return height;
-    }
-
     public void gameOver(){
-        gameOverCond = true;
+        gameOverCondition = true;
     }
     
     public void reset(){
-        gameOverCond = false;
+        gameOverCondition = false;
         setX(0);
         setY(0);
         draw();
     }
 
+    public void step (double elapsedTime) {}
 }

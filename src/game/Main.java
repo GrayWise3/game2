@@ -2,16 +2,9 @@ package game;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
-import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
 
 public class Main extends Application{
     
@@ -28,7 +21,6 @@ public class Main extends Application{
         Scene scene = myGame.init();
         s.setScene(scene);
         s.show();
-        //set the games loop
         KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
         	 e -> myGame.step(SECOND_DELAY)) ;
         Timeline animation = new Timeline();

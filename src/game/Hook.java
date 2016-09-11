@@ -9,16 +9,42 @@ public class Hook extends Actor{
     private static final double KEY_INPUT_SPEED = 10;
     private ImageView hookview;
     private Image hook;
-    private double x;
-    private double y;
+    private int startX = 180;
+    private int startY = 160;
+    private double myX;
+    private double myY;
     private int height = 40;
     private int width = 20;
-    private boolean gameOverCond = false;
+    private boolean gameOverCondition = false;
     
     public Hook(){
-    	x = 180;
-    	y = 160;
+        myX = (double) startX;
+        myY = (double) startY;
     	init();
+    }
+    
+    public double getX(){
+        return myX;
+    }
+    
+    public double getY(){
+        return myY;
+    }
+    
+    public void setX(double input){
+        myX = input;
+    }
+    
+    public void setY(double input){
+        myY = input;
+    }
+
+    public int getWidth () {
+        return width;
+    }
+            
+    public int getHeight () {
+        return height;
     }
     
     public void init(){
@@ -30,33 +56,17 @@ public class Hook extends Actor{
     }
     
     public Node draw(){
-        hookview.setX(x);
-        hookview.setY(y);
+        hookview.setX(myX);
+        hookview.setY(myY);
         return hookview;
-    }
-
-    public double getX(){
-    	return x;
-    }
-    
-    public double getY(){
-    	return y;
-    }
-    
-    public void setX(double i){
-    	x = i;
-    }
-    
-    public void setY(double i){
-    	y = i;
     }
     
     public void step(double elapsedTime){
         draw();
     }
 
-    public void move(KeyCode code) {
-        if(gameOverCond == false)
+    public void control(KeyCode code) {
+        if(gameOverCondition == false)
         {
 	switch (code) {
         case RIGHT:
@@ -84,33 +94,23 @@ public class Hook extends Actor{
             default:
 		} 
         }
-	}
-	
-
-    public int getWidth () {
-        return width;
-    }
-	    
-    public int getHeight () {
-        return height;
     }
 
     public boolean isColliding(Actor a){
-        if(x >= a.getX() && x <= a.getX()+a.getWidth()-10 && y >= a.getY()-20 && y <= a.getY()+a.getHeight()-30){
+        if(myX >= a.getX() && myX <= a.getX()+a.getWidth()-10 && myY >= a.getY()-20 && myY <= a.getY()+a.getHeight()-30){
             return true;
         }
-            return false;
-	}
+        return false;
+    }
 
     public void gameOver() {
-        gameOverCond = true;
+        gameOverCondition = true;
     }
     
     public void reset(){
-        gameOverCond = false;
-        x = 180;
-        y = 160;
+        gameOverCondition = false;
+        myX = startX;
+        myY = startY;
         draw();
     }
-
 }
