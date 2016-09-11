@@ -17,10 +17,13 @@ public class Hook extends Actor{
     private int width = 20;
     private boolean gameOverCondition = false;
     
+    /**
+     * Creates a new Hook at given locations
+     */
     public Hook(){
         myX = (double) startX;
         myY = (double) startY;
-    	init();
+        init();
     }
     
     public double getX(){
@@ -47,6 +50,9 @@ public class Hook extends Actor{
         return height;
     }
     
+    /**
+     * Loads the image needed for the hook
+     */
     public void init(){
         hook = new Image(getClass().getClassLoader().getResourceAsStream("hook.png"));
         hookview = new ImageView();
@@ -55,58 +61,83 @@ public class Hook extends Actor{
         hookview.setFitWidth(width);
     }
     
+    /**
+     * Draws the hook at the starting location
+     */
     public Node draw(){
         hookview.setX(myX);
         hookview.setY(myY);
         return hookview;
     }
     
+    /**
+     * Calls draw to update hook location
+     * @param elapsedTime
+     */
     public void step(double elapsedTime){
         draw();
     }
 
+    /**
+     * Sets what the hook does when certain keys are pressed
+     * @param code
+     */
     public void control(KeyCode code) {
         if(gameOverCondition == false)
         {
-	switch (code) {
+        switch (code) {
         case RIGHT:
                 if(getX()+width < 750)
-        	setX(getX() + KEY_INPUT_SPEED);
+                setX(getX() + KEY_INPUT_SPEED);
                 break;
         case LEFT:
-        	if(getX() > 180)
-        	{
-        	setX(getX() - KEY_INPUT_SPEED);
-        	}
+                if(getX() > 180)
+                {
+                setX(getX() - KEY_INPUT_SPEED);
+                }
             break;
         case UP:    
-        	if(getY() > 160)
-        	{
-        	setY(getY() - KEY_INPUT_SPEED);
-        	}
+                if(getY() > 160)
+                {
+                setY(getY() - KEY_INPUT_SPEED);
+                }
             break;
         case DOWN:
             if(getY() < 500-height)
-        	{
-        	setY(getY() + KEY_INPUT_SPEED);
-        	}
+                {
+                setY(getY() + KEY_INPUT_SPEED);
+                }
             break;
             default:
-		} 
+                } 
         }
     }
 
+    /**
+     * Checks if hook is colliding with passed in Actor
+     * @param a
+     * @return
+     */
     public boolean isColliding(Actor a){
-        if(myX >= a.getX() && myX <= a.getX()+a.getWidth()-10 && myY >= a.getY()-20 && myY <= a.getY()+a.getHeight()-30){
+        if(myX >= a.getX() && 
+                myX <= a.getX()+a.getWidth()-10 && 
+                myY >= a.getY()-20 && 
+                myY <= a.getY()+a.getHeight()-30){
             return true;
         }
         return false;
     }
 
+    /**
+     * Sets the hook to recognize when the game ends
+     */
     public void gameOver() {
         gameOverCondition = true;
     }
     
+    /**
+     * Resets the hook to original location
+     */
     public void reset(){
         gameOverCondition = false;
         myX = startX;
