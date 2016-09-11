@@ -24,7 +24,7 @@ public class Player extends Actor{
     }
     
     public Node draw(){
-    fisherman = new Image("/images/fisherman.png");
+    fisherman = new Image(getClass().getClassLoader().getResourceAsStream("fisherman.png"));
     myPlayer = new ImageView();
     myPlayer.setImage(fisherman);
     myPlayer.setFitHeight(height);

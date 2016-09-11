@@ -27,7 +27,7 @@ public class Fish extends Actor {
     
     public void init() {
         
-        fish = new Image("/images/fish.gif");
+        fish = new Image(getClass().getClassLoader().getResourceAsStream("fish.gif"));
         fishview = new ImageView();
         fishview.setImage(fish);
         fishview.setFitHeight(height);

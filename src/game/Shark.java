@@ -16,6 +16,8 @@ public class Shark extends Actor {
     private double sharkYSpeed = 0;
     private int height = 86;
     private int width = 133;
+    private boolean isFrozen;
+    private int counter;
     private int sharkDir = 1;
     
     public Shark(double d, double e){
@@ -27,7 +29,7 @@ public class Shark extends Actor {
     
     public void init() {
         
-        shark = new Image("/images/shark.gif");
+        shark = new Image(getClass().getClassLoader().getResourceAsStream("shark.gif"));
         sharkview = new ImageView();
         sharkview.setImage(shark);
         sharkview.setFitHeight(height);
@@ -75,7 +77,10 @@ public class Shark extends Actor {
                 setX(getX() - sharkXSpeed*elapsedTime);
                 setY(getY() - sharkYSpeed*elapsedTime);
                 if(getX()+width <= 0)
+                {
                         setX(screenWidth);
+                        resize();
+                }
                 if(getY() <= 160){
                     setY(160);
                     
@@ -111,13 +116,24 @@ public class Shark extends Actor {
             sharkXSpeed = ((Math.random()+2)*30)*sharkDir;
             draw();
         }
+       
         
-//      public void shrink(){
-//          height = (int) (height/1.01);
-//          width = (int) (width/1.01);
-//          fishview.setFitHeight(height);
-//          fishview.setFitWidth(width);
-//      }
+      public void shrink(){
+          if(height > 45){
+          height = (int) (height/1.5);
+          width = (int) (width/1.5);
+          sharkview.setFitHeight(height);
+          sharkview.setFitWidth(width);
+          }
+          else{}
+      }
+      
+      public void resize(){
+          height = 86;
+          width = 133;
+          sharkview.setFitHeight(height);
+          sharkview.setFitWidth(width); 
+      }
 
 }
 

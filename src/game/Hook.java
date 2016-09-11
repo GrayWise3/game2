@@ -22,7 +22,7 @@ public class Hook extends Actor{
     }
     
     public void init(){
-        hook = new Image("/images/hook.png");
+        hook = new Image(getClass().getClassLoader().getResourceAsStream("hook.png"));
         hookview = new ImageView();
         hookview.setImage(hook);
         hookview.setFitHeight(height);

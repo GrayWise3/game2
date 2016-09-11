@@ -2,6 +2,7 @@ package game;
 import java.util.ArrayList;
 import java.util.Arrays;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -46,6 +47,7 @@ class Game {
     private Button nextLevel = new Button("Level 2");
     private Button startGame = new Button("Start Game");
     private Button wonGame = new Button("You Won!");
+    private int count = 0;
     
     
     public Game(int width, int height) {
@@ -86,26 +88,29 @@ class Game {
         youWinText.setFont(Font.font ("Verdana", 70));
         youWinText.setX(125);
         youWinText.setY(400);
-        background = new Image("/images/background.jpg");
+        background = new Image(getClass().getClassLoader().getResourceAsStream("background.jpg"));
         bgView = new ImageView();
         bgView.setImage(background);
         bgView.setFitHeight(600);
         bgView.setY(-50);
         bgView.preserveRatioProperty();
-        mainScreen = new Image("images/mainscreen.png");
+        mainScreen = new Image(getClass().getClassLoader().getResourceAsStream("mainscreen.png"));
         mainView = new ImageView();
         mainView.setImage(mainScreen);
         wonGame.setLayoutX(360);
         wonGame.setLayoutY(425);
         wonGame.setOnMouseClicked(e -> splashScreen());
-        
         myScene.setOnKeyPressed(e -> handleKeyInput(e.getCode()));
         myScene.setOnMouseClicked(e -> handleMouseInput(e.getX(), e.getY()));
-        
-        if(splash && !levelOne && !levelTwo){splashScreen();}
-        if(!splash && levelOne && !levelTwo){levelOne();}
-        if(!splash && !levelOne && levelTwo){levelTwo();}
-        
+        if(splash && !levelOne && !levelTwo){
+            splashScreen();
+            }
+        if(!splash && levelOne && !levelTwo){
+            levelOne();
+            }
+        if(!splash && !levelOne && levelTwo){
+            levelTwo();
+            }
         myScene.setRoot(root);
         return myScene;
     }
@@ -113,9 +118,16 @@ class Game {
     private void splashScreen () {
         root.getChildren().addAll(mainView);
         root.getChildren().addAll(startGame);
+        //add instructions
+        Image inst = new Image(getClass().getClassLoader().getResourceAsStream("instructions.png"));
+        ImageView instructions = new ImageView(inst);
+        instructions.setX(500);
+        instructions.setY(225);
+        instructions.setFitHeight(231);
+        instructions.setFitWidth(227);
+        root.getChildren().add(instructions);
     }
     private void levelTwo(){
-        //System.out.println("Level two");
         splash = false;
         levelOne = false;
         levelTwo = true;
@@ -124,16 +136,7 @@ class Game {
         splash = false;
         levelOne = false;
         levelTwo = true;
-        exes.add(300);
-        whys.add(300);
-        for(int i = 0; i < exes.size(); i++)
-        {
-            fish.add(new Fish(exes.get(i), whys.get(i)));
-        }
-        for(int i = 0; i < fish.size(); i++)
-        {
-            root.getChildren().addAll(fish.get(i).draw());
-        }
+        addFish();
         
         sharkX.addAll(Arrays.asList(400, 700, 1200, 1500, 2000));
         sharkY.addAll(Arrays.asList(400, 300, 200, 250, 350));
@@ -148,6 +151,22 @@ class Game {
         }
         root.getChildren().addAll(hook.draw());
 
+    }
+    private void addFish () {
+        exes.addAll(Arrays.asList(400, 500, 600, 700, 800, 900, 1000, 1100, 
+                                  1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900, 
+                                  2000, 2100, 2200, 2300, 2400, 2500, 2600, 2700, 2800, 2900, 3000));
+        whys.addAll(Arrays.asList(300, 250, 400, 350, 200, 400,  300,  200,  
+                                  300,  350,  250,  400,  350,  200,  400,  300, 
+                                  350, 300, 250, 400, 350, 200, 400,  300,  200,  300,  350,  250));
+        for(int i = 0; i < exes.size(); i++)
+        {
+            fish.add(new Fish(exes.get(i), whys.get(i)));
+        }
+        for(int i = 0; i < fish.size(); i++)
+        {
+            root.getChildren().addAll(fish.get(i).draw());
+        }
     }
     private void restart() {
         root.getChildren().clear();
@@ -172,25 +191,11 @@ class Game {
     }
     
     public void levelOne(){
-        exes.addAll(Arrays.asList(400, 500, 600, 700, 800, 900, 1000, 1100, 
-                                  1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900, 
-                                  2000, 2100, 2200, 2300, 2400, 2500, 2600, 2700, 2800, 2900, 3000));
-        whys.addAll(Arrays.asList(300, 250, 400, 350, 200, 400,  300,  200,  
-                                  300,  350,  250,  400,  350,  200,  400,  300, 
-                                  350, 300, 250, 400, 350, 200, 400,  300,  200,  300,  350,  250));
-        //System.out.println("level one");
+        
         splash = false;
         levelOne = true;
         draw();
-        for(int i = 0; i < exes.size(); i++)
-        {
-            fish.add(new Fish(exes.get(i), whys.get(i)));
-        }
-
-        for(int i = 0; i < fish.size(); i++)
-        {
-            root.getChildren().addAll(fish.get(i).draw());
-        }
+        addFish();
         root.getChildren().addAll(hook.draw());
 
     }
@@ -212,7 +217,6 @@ class Game {
             sharks.get(i).step(elapsedTime);
         }
     	hook.step(elapsedTime);
-    	//change time
         score.setText("Score: " + scoreInt);
     	updateTime(elapsedTime);
     	youWin();
@@ -242,18 +246,15 @@ class Game {
     
     private void handleMouseInput(double x, double y){
         if(tryAgain.contains(x, y)){
-          //  System.out.println("pressed");
             isOver = false;
             tryAgain.getOnMouseClicked();
         }
         if(nextLevel.contains(x, y)){
-           // System.out.println("pressed");
             levelOne = false;
             nextLevel.getOnMouseClicked();
         }
         
         if(wonGame.contains(x, y)){
-           // System.out.println("pressed");
             splash = true;
             levelOne = false;
             levelTwo = false;
@@ -261,7 +262,6 @@ class Game {
         }
         
         if(startGame.contains(x, y)){
-           // System.out.println("pressed");
             splash = false;
             levelOne = true;
             startGame.getOnMouseClicked();
@@ -273,17 +273,22 @@ class Game {
                     x <= sharks.get(i).getX()+sharks.get(i).getWidth() && 
                     y >= sharks.get(i).getY() && 
                     y <= sharks.get(i).getY()+sharks.get(i).getHeight() && isOver == false){
-                sharks.get(i).setSpeed(0);
+                sharks.get(i).shrink();
             }
         }
     }
     
     private void handleKeyInput(KeyCode code) {
-        
+       switch (code){
+           case DIGIT2:
+               count = fish.size();
+               break;
+           default:
+               break;
+       }
        if(isOver == false)
        {
         if(code.getName().equals("Space") && splash == false){
-           // System.out.println("pressed space");
             for(int i = 0; i < fish.size(); i++)
             {
             if(hook.isColliding(fish.get(i)) && fish.get(i).getY() != 160){
@@ -291,13 +296,11 @@ class Game {
                 fish.get(i).setSpeed(0);
                 fish.get(i).setYSpeed(5000);
                 scoreInt += 5;
-                //fish.get(i).shrink();
                 score.setText(("Score: " + scoreInt));
-            }
+                }
             }
         hook.setY(160);
         }
-        
         player.move(code);
         hook.move(code);
         for(int i = 0; i < fish.size(); i++)
@@ -305,7 +308,6 @@ class Game {
             fish.get(i).move(code);
         }
        }
-        
     }
     
     public void gameOver(){
@@ -327,7 +329,6 @@ class Game {
     }
     
     public void youWin(){
-        int count = 0;
         
         for(int i = 0; i < fish.size(); i++)
         {
@@ -335,23 +336,21 @@ class Game {
                count++;
            }
         }
-        if(count == fish.size() && didWin == false && splash == false){
+        if(count >= fish.size() && didWin == false && splash == false){
             scoreInt = scoreInt + (int)keepTime;
             score.setText("Score: " + scoreInt);
             didWin = true;
             if(levelOne){
-                System.out.println("Level one is true");
             root.getChildren().addAll(youWinText);
             root.getChildren().addAll(nextLevel);
             }
             else if(levelTwo){
-                System.out.println("Level two is true");
                 wonGameText.setText("YOU WIN!" + "\n" + "Final Score: " + scoreInt);
                 root.getChildren().addAll(wonGameText);
                 root.getChildren().addAll(wonGame);
             }
             
         }
+        count = 0;
     }
-
 }
