@@ -12,7 +12,7 @@ Controls:
 	Up/Down Arrows: Raise/Lower your fishing hook
 	Left/Right Arrows: Move your boat
 	Space Bar: Reel in Hook
-	Mouse Click: Freeze Sharks
+	Mouse Click: Shrink Sharks
 
 Objective:
 	Catch all the fish before the timer runs out!
@@ -24,9 +24,9 @@ Level 1: Fish are swimming beneath you. When they are right next to your
 	advance to level two!
 		
 Level 2: Now, sharks are swimming among the fish. You'll need to 
-	avoid them. Using the mouse, you can click on a shark to freeze it
-	temporarily. If you catch all the fish before time runs out without 
-	hitting any sharks, you win! 
+	avoid them. Using the mouse, you can click on a shark to shrink it. 
+	If you catch all the fish before time runs out without hitting 
+	any sharks, you win! 
 		
 	
 		
