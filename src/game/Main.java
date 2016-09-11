@@ -14,7 +14,9 @@ public class Main extends Application{
     private int screenHeight = 500;
     private int screenWidth = 800;
 
-    @Override
+    /**
+     * Creates and initializes the Game and sets the animation to start
+     */
     public void start (Stage s) {
     	Game myGame = new Game(screenWidth, screenHeight);
         s.setTitle(myGame.getTitle());

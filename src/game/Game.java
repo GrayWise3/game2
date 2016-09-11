@@ -45,16 +45,29 @@ class Game {
     private int count = 0;
     private int scoreInt = 0;
     
-    
+    /**
+     * Constructs the Game object
+     * @param width
+     * @param height
+     */
     public Game(int width, int height) {
         root = new Group();
         myScene = new Scene(root, width, height, Color.WHITE);
     }
     
+    /**
+     * Returns the title of the Game
+     * @return
+     */
     public String getTitle () {
         return TITLE;
     }
 
+    /**
+     * Initializes the game, sets up handling of clicks/keystrokes, 
+     * and decides which game screen to load
+     * @return
+     */
     public Scene init () {
         root = new Group();
         root.getChildren().clear();
@@ -140,7 +153,7 @@ class Game {
         root.getChildren().add(instructions);
     }
     
-    public void levelOne(){
+    private void levelOne(){
         splash = false;
         levelOne = true;
         levelTwo = false;
@@ -149,6 +162,7 @@ class Game {
         root.getChildren().addAll(hook.draw());
     }
     
+
     private void levelTwo(){
         splash = false;
         levelOne = false;
@@ -165,7 +179,7 @@ class Game {
     }
     
     private void addSharks(){
-        sharkX.addAll(Arrays.asList(400, 700, 1400, 1500, 2000));
+        sharkX.addAll(Arrays.asList(400, 700, 1200, 1500, 2000));
         sharkY.addAll(Arrays.asList(400, 300, 200, 250, 350));
         for(int i = 0; i < sharkX.size(); i++)
         {
@@ -216,13 +230,18 @@ class Game {
         init();
     }
     
-    public void draw(){ 
+    private void draw(){ 
         root.getChildren().addAll(bgView);
         root.getChildren().addAll(score);
         root.getChildren().addAll(time);
         root.getChildren().addAll(player.draw());
     }
 
+    /**
+     * Updates every actor's position, as well as the time, 
+     * by calling all of their step methods every "elapsed time"
+     * @param elapsedTime
+     */
     public void step (double elapsedTime) {
     	for(int i = 0; i < fish.size(); i++)
     	{
@@ -316,7 +335,7 @@ class Game {
             }
         hook.setY(160);
         }
-        player.move(code);
+        player.control(code);
         hook.control(code);
         for(int i = 0; i < fish.size(); i++)
         {
@@ -325,10 +344,10 @@ class Game {
        }
     }
     
-    public void gameOver(){
+    private void gameOver(){
         if(isOver == false && splash == false){
-        root.getChildren().addAll(gameOverText);
-        root.getChildren().addAll(tryAgain);
+        root.getChildren().add(gameOverText);
+        root.getChildren().add(tryAgain);
         for(int i = 0; i < fish.size(); i++)
         {
             fish.get(i).setSpeed(0);       
@@ -342,7 +361,7 @@ class Game {
         }
     }
     
-    public void youWin(){ 
+    private void youWin(){ 
         for(int i = 0; i < fish.size(); i++)
         {
            if(fish.get(i).getY() == 160){
