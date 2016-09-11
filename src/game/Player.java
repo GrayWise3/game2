@@ -16,20 +16,34 @@ public class Player extends Actor{
     private int screenWidth = 800;
     private boolean gameOverCondition = false;
     
+    /**
+     * Creates a new Player at the starting x and y locations
+     */
     public Player(){
     	myX = 0;
     	myY = 0;
+    	init();
     }
     
+    /**
+     * Loads the image for the fisherman
+     */
+    public void init(){
+        fisherman = new Image(getClass().getClassLoader().getResourceAsStream("fisherman.png"));
+        myPlayer = new ImageView();
+        myPlayer.setImage(fisherman);
+        myPlayer.setFitHeight(height);
+        myPlayer.setFitWidth(width);
+        draw();
+    }
+    
+    /**
+     * Draws the Player at the starting location
+     */
     public Node draw(){
-    fisherman = new Image(getClass().getClassLoader().getResourceAsStream("fisherman.png"));
-    myPlayer = new ImageView();
-    myPlayer.setImage(fisherman);
-    myPlayer.setFitHeight(height);
-    myPlayer.setFitWidth(width);
-    myPlayer.setX(myX);
-    myPlayer.setY(myY);
-    return myPlayer;
+        myPlayer.setX(myX);
+        myPlayer.setY(myY);
+        return myPlayer;
     }
 
     public double getX(){
@@ -56,7 +70,11 @@ public class Player extends Actor{
         return height;
     }
 
-    public void move(KeyCode code) {
+    /**
+     * Controls Player's movement based on key inputs
+     * @param code
+     */
+    public void control(KeyCode code) {
         if(gameOverCondition == false)
         {
         switch (code) {
@@ -73,10 +91,16 @@ public class Player extends Actor{
         }
     }
 
+    /**
+     * Sets the player to know it is game over
+     */
     public void gameOver(){
         gameOverCondition = true;
     }
     
+    /**
+     * Resets the player to its original position
+     */
     public void reset(){
         gameOverCondition = false;
         setX(0);
