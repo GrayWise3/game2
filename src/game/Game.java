@@ -12,7 +12,15 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
-
+/**
+ * The Game class handles all of the creation of the GUI, as well as all of the 
+ * interactions between Actors on the screen. It builds the levels, fills them with
+ * fish and/or sharks, and then sets everything in motion. It is also responsible for
+ * displaying all of the messages and buttons that pop up on the screen throughout
+ * gameplay.
+ * @author Grayson Wise
+ *
+ */
 class Game {
     private static final String TITLE = "Hook Line Sinker";
     private Group root;

@@ -2,7 +2,13 @@ package game;
 
 import javafx.scene.Node;
 
-
+/**
+ * Actor is a superclass to every moving part of the game. It sets the minimum 
+ * methods required for every object one may interact with in the game, such as the 
+ * hook, fish, sharks, and player classes. 
+ * @author Grayson Wise
+ *
+ */
 public abstract class Actor {
     private double myX;
     private double myY;

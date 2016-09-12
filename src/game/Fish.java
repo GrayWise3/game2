@@ -5,7 +5,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 
-
+/**
+ * The Fish class is a subclass of Actor. It is very similar to the shark class but has 
+ * very different interactions with the hook. There are methods that control the 
+ * fish's speed and location throughout the game. 
+ * @author Grayson Wise
+ *
+ */
 public class Fish extends Actor {
     private int screenWidth = 800;
     private ImageView fishview;

@@ -5,7 +5,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 
-
+/**
+ * The Hook class is a subclass of Actor. This is controlled by the user and therefore 
+ * it has methods that handle key input, as well as checking to see when it has collided
+ * with another actor and what to do when it does. 
+ * @author Grayson Wise
+ *
+ */
 public class Hook extends Actor {
     private static final double KEY_INPUT_SPEED = 10;
     private ImageView hookview;

@@ -5,7 +5,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 
-
+/**
+ * Player is a subclass of Actor. It is the class that controls the player, therefore
+ * it contains methods about handling key input to allow a user to control the player.
+ * @author Grayson Wise
+ *
+ */
 public class Player extends Actor {
     private static final double KEY_INPUT_SPEED = 10;
     private ImageView myPlayer;
@@ -118,6 +123,5 @@ public class Player extends Actor {
         draw();
     }
 
-    public void step (double elapsedTime) {
-    }
+    public void step (double elapsedTime) {}
 }

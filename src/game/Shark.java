@@ -5,7 +5,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 
-
+/**
+ * The Shark class extends Actor. It is very similar to the fish class but has 
+ * very different interactions with the hook. There are methods that control the 
+ * sharks speed, location, and size throughout the game. 
+ * @author Grayson Wise
+ *
+ */
 public class Shark extends Actor {
     private int screenWidth = 800;
     private ImageView sharkview;

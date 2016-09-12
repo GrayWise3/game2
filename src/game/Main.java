@@ -8,7 +8,12 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-
+/**
+ * The main class is the class from which you run the game. It creates a new instance of
+ * the game and initializes it. 
+ * @author Grayson Wise
+ *
+ */
 public class Main extends Application {
 
     private static final int FRAMES_PER_SECOND = 60;
