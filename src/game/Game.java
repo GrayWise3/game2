@@ -261,20 +261,18 @@ class Game {
     	
     	for(int i = 0; i < sharks.size(); i++)
         {
-            if(hook.isColliding(sharks.get(i))){
+            if(didWin == false && hook.isColliding(sharks.get(i))){
                 gameOver();
             }
         }
     }
     
     private void updateTime (double elapsedTime) {
-        if(didWin==false && isOver == false && splash == false)
-        {
-        keepTime = keepTime - elapsedTime;
-        time.setText("Time: " + (int)keepTime);
+        if(didWin==false && isOver == false && splash == false){
+            keepTime = keepTime - elapsedTime;
+            time.setText("Time: " + (int)keepTime);
         }
-        else
-        {
+        else{
             time.setText("Time: " + (int)keepTime);
         }
     }
@@ -327,7 +325,7 @@ class Game {
             for(int i = 0; i < fish.size(); i++)
             {
             if(hook.isColliding(fish.get(i)) && fish.get(i).getY() != 160){
-                fish.get(i).setSpeed(0);
+                fish.get(i).setXSpeed(0);
                 fish.get(i).setYSpeed(5000);
                 scoreInt += 5;
                 score.setText(("Score: " + scoreInt));
@@ -350,7 +348,7 @@ class Game {
         root.getChildren().add(tryAgain);
         for(int i = 0; i < fish.size(); i++)
         {
-            fish.get(i).setSpeed(0);       
+            fish.get(i).setXSpeed(0);       
         }
         hook.gameOver();
         player.gameOver();
@@ -382,10 +380,11 @@ class Game {
                 youWinText.setText("You Win! Final Score: " + scoreInt);
                 root.getChildren().add(youWinText);
                 root.getChildren().add(wonGame);
+                didWin = true;
             }
             for(int i = 0; i < fish.size(); i++)
             {
-                fish.get(i).setSpeed(0);       
+                fish.get(i).setXSpeed(0);       
             }
         }
         count = 0;
