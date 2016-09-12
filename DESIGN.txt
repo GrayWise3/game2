@@ -13,11 +13,18 @@ Controls:
 	Left/Right Arrows: Move your boat
 	Space Bar: Reel in Hook
 	Mouse Click: Shrink Sharks
+	
+Cheat Keys:
+	S: Slows down fish and sharks
+	F: Speeds up fish and sharks
+	2: Automatically move to level two
+		- If on level two, automatically win game
+	G: Indestructable Hook!
 
 Objective:
 	Catch all the fish before the timer runs out!
 	
-Level 1: Fish are swimming beneath you. When they are right next to your
+Level 1: Fish are swimming beneath you. When they are right on to your
 	hook, click space bar to catch them! If you lined it up correctly, 
 	you will successfully catch the fish! If not, you'll reel in an 
 	empty line. If you catch all the fish before time runs out, you can 
