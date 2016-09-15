@@ -1,3 +1,6 @@
+//This file is part of my code masterpiece
+//Grayson Wise
+
 package game;
 
 import javafx.scene.Node;
@@ -13,13 +16,14 @@ import javafx.scene.input.KeyCode;
  */
 public class Player extends Actor {
     private static final double KEY_INPUT_SPEED = 10;
+    private final int height = 183;
+    private final int width = 258;
+    private final int screenWidth = 800;
+    
     private ImageView myPlayer;
     private Image fisherman;
     private double myX;
     private double myY;
-    private int height = 183;
-    private int width = 258;
-    private int screenWidth = 800;
     private boolean gameOverCondition = false;
 
     /**
@@ -123,5 +127,5 @@ public class Player extends Actor {
         draw();
     }
 
-    public void step (double elapsedTime) {}
+    public void step (double elapsedTime){}
 }
